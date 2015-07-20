@@ -1,0 +1,24 @@
+{
+  "name": "ts-react",
+  "version": "0.0.1",
+  "description": "React/Flux TodoMVC example written with TypeScript",
+  "main": "js/app.js",
+  "scripts": {
+    "build": "tsc && browserify js/app.js -o js/bundle.js"
+  },
+  "dependencies": {
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "ts-eventemitter": "0.0.1",
+    "tsd": "^0.6.3",
+    "typescript": "git@github.com:Microsoft/TypeScript.git#2c5ba08266d06bab8a9ad64d00cbc37f1fb47c29"
+  },
+  "keywords": [
+    "React",
+    "TypeScript"
+  ],
+  "author": "kimamula",
+  "license": "ISC"
+}
