@@ -11,13 +11,15 @@ export default class TodoTextInput extends React.Component<{
     value?: string
 }, {value: string;}> {
 
-    constructor() {
-        super();
-        this.state = { 'value': '' };
-    }
-
-    componentDidMount(): void {
-        this.setState({ 'value': this.props.value });
+    constructor(props: {
+        className?: string;
+        id?: string;
+        placeholder?: string;
+        onSave: (value: string) => void;
+        value?: string
+    }) {
+        super(props);
+        this.state = { 'value': props.value? props.value : '' };
     }
 
     render(): JSX.Element  {

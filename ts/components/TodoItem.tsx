@@ -6,8 +6,8 @@ import {Todo} from '../stores/TodoStore'
 
 export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: boolean;}> {
 
-    constructor() {
-        super();
+    constructor(props: {todo: Todo}) {
+        super(props);
         this.state = {
             'isEditing': false
         };

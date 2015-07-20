@@ -10,8 +10,8 @@ export default class TodoApp extends React.Component<{}, {
     areAllComplete: boolean;
 }> {
 
-    constructor() {
-        super();
+    constructor(props: {}) {
+        super(props);
         this.state = this.fetchLatestState();
     }
 
