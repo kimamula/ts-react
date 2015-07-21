@@ -3,23 +3,19 @@ import * as React from 'react';
 
 let ENTER_KEY_CODE = 13;
 
-export default class TodoTextInput extends React.Component<{
+export interface Props {
     className?: string;
     id?: string;
     placeholder?: string;
     onSave: (value: string) => void;
-    value?: string
-}, {value: string;}> {
+    value?: string;
+}
 
-    constructor(props: {
-        className?: string;
-        id?: string;
-        placeholder?: string;
-        onSave: (value: string) => void;
-        value?: string
-    }) {
+export default class TodoTextInput extends React.Component<Props, {value: string;}> {
+
+    constructor(props: Props) {
         super(props);
-        this.state = { 'value': props.value? props.value : '' };
+        this.state = { 'value': props.value ? props.value : '' };
     }
 
     render(): JSX.Element  {
@@ -45,15 +41,11 @@ export default class TodoTextInput extends React.Component<{
 
     private save(): void {
         this.props.onSave(this.state.value);
-        this.setState({
-            value: ''
-        });
+        this.setState({ 'value': '' });
     }
 
     private onChange(event: React.FormEvent): void {
-        this.setState({
-            value: event.target['value']
-        });
+        this.setState({ 'value': event.target['value'] });
     }
 
     private onKeyDown(event: React.KeyboardEvent): void {
