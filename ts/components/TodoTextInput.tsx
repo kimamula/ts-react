@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import * as React from 'react';
 
 let ENTER_KEY_CODE = 13;

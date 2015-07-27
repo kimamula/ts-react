@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import {TsEventEmitter, EventBase, Event0} from 'ts-eventemitter';
 

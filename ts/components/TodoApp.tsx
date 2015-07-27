@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import * as React from 'react';
 import Footer from './Footer';
 import Header from './Header';

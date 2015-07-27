@@ -4,6 +4,7 @@
   "description": "React/Flux TodoMVC example written with TypeScript",
   "main": "js/app.js",
   "scripts": {
+    "postinstall": "dtsm install",
     "build": "tsc && browserify js/app.js -o js/bundle.js"
   },
   "dependencies": {
@@ -12,8 +13,8 @@
   "devDependencies": {
     "browserify": "^6.2.0",
     "ts-eventemitter": "0.0.1",
-    "tsd": "^0.6.3",
-    "typescript": "git@github.com:Microsoft/TypeScript.git#2c5ba08266d06bab8a9ad64d00cbc37f1fb47c29"
+    "typescript": "^1.6.0-dev.20150727",
+    "dtsm": "^0.10.3"
   },
   "keywords": [
     "React",

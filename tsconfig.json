@@ -14,7 +14,8 @@
     },
     "filesGlob": [
         "./ts/**/*.ts",
-        "./ts/**/*.tsx"
+        "./ts/**/*.tsx",
+        "./typings/*.d.ts"
     ],
     "files": [
         "./ts/actions/TodoActions.ts",
@@ -26,6 +27,7 @@
         "./ts/components/MainSection.tsx",
         "./ts/components/TodoApp.tsx",
         "./ts/components/TodoItem.tsx",
-        "./ts/components/TodoTextInput.tsx"
+        "./ts/components/TodoTextInput.tsx",
+        "./typings/bundle.d.ts"
     ]
 }
