@@ -12,9 +12,9 @@
   },
   "devDependencies": {
     "browserify": "^6.2.0",
-    "dtsm": "^0.10.3",
+    "dtsm": "^0.12.0",
     "ts-eventemitter": "0.0.1",
-    "typescript": "^1.6.0-beta"
+    "typescript": "^1.6.2"
   },
   "keywords": [
     "React",
