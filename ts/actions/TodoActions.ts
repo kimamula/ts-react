@@ -1,36 +1,37 @@
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import {Todo} from '../stores/TodoStore';
+import TodoReducers from '../reducers/TodoReducers';
+import {Todo, TodoState} from '../stores/TodoStore';
+import * as Rx from 'rx';
 
-module TodoActions {
-
-    export function create(text: string): void {
-        AppDispatcher.event('create').emit(text);
+export default class TodoActions {
+    observable = new Rx.Subject<(state: TodoState) => TodoState>();
+    constructor(private todoReducers: TodoReducers) {
+    }
+    create(text: string): void {
+        this.observable.onNext(this.todoReducers.for('create').applyPayload({text}));
     }
 
-    export function updateText(id: string, text: string): void {
-        AppDispatcher.event('updateText').emit(id, text);
+    updateText(index: number, text: string): void {
+        this.observable.onNext(this.todoReducers.for('updateText').applyPayload({index, text}));
     }
 
-    export function toggleComplete(todo: Todo): void {
-        if (todo.complete) {
-            AppDispatcher.event('undoComplete').emit(todo.id);
+    toggleComplete(index: number, todo: Todo): void {
+        if (todo.isCompleted()) {
+            this.observable.onNext(this.todoReducers.for('undoComplete').applyPayload({index}));
         } else {
-            AppDispatcher.event('complete').emit(todo.id);
+            this.observable.onNext(this.todoReducers.for('complete').applyPayload({index}));
         }
     }
 
-    export function toggleCompleteAll(): void {
-        AppDispatcher.event('toggleCompleteAll').emit();
+    toggleCompleteAll(): void {
+        this.observable.onNext(this.todoReducers.for('toggleCompleteAll').applyPayload({}));
     }
 
-    export function destroy(id: string): void {
-        AppDispatcher.event('destroy').emit(id);
+    destroy(index: number): void {
+        this.observable.onNext(this.todoReducers.for('destroy').applyPayload({index}));
     }
 
-    export function destroyCompleted(): void {
-        AppDispatcher.event('destroyCompleted').emit();
+    destroyCompleted(): void {
+        this.observable.onNext(this.todoReducers.for('destroyCompleted').applyPayload({}));
     }
 
 }
-
-export default TodoActions;

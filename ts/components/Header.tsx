@@ -2,7 +2,7 @@ import * as React from 'react';
 import TodoActions from '../actions/TodoActions';
 import TodoTextInput from './TodoTextInput';
 
-export default class Header extends React.Component<{}, {}> {
+export default class Header extends React.Component<{actions: TodoActions}, {}> {
 
     render(): JSX.Element {
         return (
@@ -21,7 +21,7 @@ export default class Header extends React.Component<{}, {}> {
 
     private onSave(text: string): void {
         if (text.trim()){
-            TodoActions.create(text);
+            this.props.actions.create(text);
         }
     }
 

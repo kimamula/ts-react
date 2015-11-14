@@ -1,25 +1,27 @@
 import * as React from 'react';
 import TodoActions from '../actions/TodoActions';
 import TodoItem from './TodoItem';
-import {Todo} from '../stores/TodoStore'
+import {Todo, TodoState} from '../stores/TodoStore'
 
-export default class MainSection extends React.Component<{
-    allTodos: {[id: string]: Todo};
-    areAllComplete: boolean;
-}, {}> {
+export default class MainSection extends React.Component<{state: TodoState, actions: TodoActions}, {}> {
 
     render(): JSX.Element {
-        let allTodos = this.props.allTodos,
-            todos: JSX.Element[] = [];
         // This section should be hidden by default
         // and shown when there are todos.
-        if (Object.keys(allTodos).length < 1) {
+        if (this.props.state.length === 0) {
             return null;
         }
 
-        for (var id in allTodos) {
-            todos.push(<TodoItem todo={allTodos[id]} />);
-        }
+        const todos: JSX.Element[] = [],
+            actions = this.props.actions;
+        let areAllCompleted = true;
+
+        this.props.state.forEach((todo, index) => {
+            if (!todo.isCompleted()) {
+                areAllCompleted = false;
+            }
+            todos.push(<TodoItem {...{todo, index, actions}} />);
+        });
 
         return (
             <section id="main">
@@ -29,7 +31,7 @@ export default class MainSection extends React.Component<{
                     onChange={() => {
                         this.onToggleCompleteAll();
                     }}
-                    checked={this.props.areAllComplete}
+                    checked={areAllCompleted}
                 />
                 <label htmlFor="toggle-all">Mark all as complete</label>
                 <ul id="todo-list">{todos}</ul>
@@ -38,7 +40,7 @@ export default class MainSection extends React.Component<{
     }
 
     private onToggleCompleteAll(): void {
-        TodoActions.toggleCompleteAll();
+        this.props.actions.toggleCompleteAll();
     }
 
 }

@@ -3,9 +3,9 @@ import TodoActions from '../actions/TodoActions';
 import TodoTextInput from './TodoTextInput';
 import {Todo} from '../stores/TodoStore'
 
-export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: boolean;}> {
+export default class TodoItem extends React.Component<{index: number, todo: Todo, actions: TodoActions}, {isEditing: boolean;}> {
 
-    constructor(props: {todo: Todo}) {
+    constructor(props: {index: number, todo: Todo, actions: TodoActions}) {
         super(props);
         this.state = {
             'isEditing': false
@@ -23,23 +23,23 @@ export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: 
                     onSave={(text: string) => {
                         this.onSave(text);
                     }}
-                    value={todo.text}
+                    value={todo.getText()}
                 />;
         }
 
         return (
             <li
                 className={
-                    todo.complete ?
+                    todo.isCompleted() ?
                         'completed' :
                         (this.state.isEditing ? 'editing' : null)
                 }
-                key={todo.id}>
+                key={this.props.index}>
                 <div className="view">
                     <input
                         className="toggle"
                         type="checkbox"
-                        checked={todo.complete}
+                        checked={todo.isCompleted()}
                         onChange={() => {
                             this.onToggleComplete();
                         }}
@@ -47,7 +47,7 @@ export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: 
                     <label onDoubleClick={() => {
                         this.onDoubleClick();
                     }}>
-                        {todo.text}
+                        {todo.getText()}
                     </label>
                     <button className="destroy" onClick={() => {
                         this.onDestroyClick();
@@ -59,7 +59,7 @@ export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: 
     }
 
     private onToggleComplete(): void {
-        TodoActions.toggleComplete(this.props.todo);
+        this.props.actions.toggleComplete(this.props.index, this.props.todo);
     }
 
     private onDoubleClick(): void {
@@ -67,12 +67,12 @@ export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: 
     }
 
     private onSave(text: string): void {
-        TodoActions.updateText(this.props.todo.id, text);
+        this.props.actions.updateText(this.props.index, text);
         this.setState({'isEditing': false});
     }
 
     private onDestroyClick(): void {
-        TodoActions.destroy(this.props.todo.id);
+        this.props.actions.destroy(this.props.index);
     }
 
 }

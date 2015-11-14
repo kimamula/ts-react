@@ -1,31 +1,20 @@
 import * as React from 'react';
 import TodoActions from '../actions/TodoActions';
-import {Todo} from '../stores/TodoStore'
+import {Todo, TodoState} from '../stores/TodoStore'
 
-export default class Footer extends React.Component<{allTodos: {[id: string]: Todo}}, {}> {
+export default class Footer extends React.Component<{state: TodoState, actions: TodoActions}, {}> {
 
     render(): JSX.Element {
-        let allTodos = this.props.allTodos,
-            completed = 0,
-            itemsLeft = 0,
-            itemsLeftPhrase = 'left',
-            clearCompletedButton: JSX.Element;
+        const total = this.props.state.length,
+            completed = this.props.state.filter((todo) => todo.isCompleted()).length,
+            itemsLeft = total - completed;
+        let clearCompletedButton: JSX.Element;
 
-        if (Object.keys(allTodos).length === 0) {
+        if (total === 0) {
             return null;
         }
 
-        for (var key in allTodos) {
-            if (allTodos[key].complete) {
-                completed++;
-            } else {
-                itemsLeft++;
-            }
-        }
-
-        itemsLeftPhrase = (itemsLeft === 1 ? ' item ' : ' items ') + itemsLeftPhrase;
-
-        if (completed) {
+        if (completed > 0) {
             clearCompletedButton =
                 <button
                     id="clear-completed"
@@ -42,7 +31,7 @@ export default class Footer extends React.Component<{allTodos: {[id: string]: To
                     <strong>
                         {itemsLeft}
                     </strong>
-                    {itemsLeftPhrase}
+                    item(s) left
                 </span>
                 {clearCompletedButton}
             </footer>
@@ -50,7 +39,7 @@ export default class Footer extends React.Component<{allTodos: {[id: string]: To
     }
 
     private onClearCompletedClick(): void {
-        TodoActions.destroyCompleted();
+        this.props.actions.destroyCompleted();
     }
 
 }

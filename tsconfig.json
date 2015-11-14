@@ -19,7 +19,9 @@
     ],
     "files": [
         "./ts/actions/TodoActions.ts",
-        "./ts/dispatcher/AppDispatcher.ts",
+        "./ts/reducers/Reducers.ts",
+        "./ts/reducers/TodoReducers.ts",
+        "./ts/stores/Store.ts",
         "./ts/stores/TodoStore.ts",
         "./ts/app.tsx",
         "./ts/components/Footer.tsx",
