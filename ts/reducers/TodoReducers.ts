@@ -16,41 +16,44 @@ export interface TodoReducers {
 
 export namespace TodoReducersFactory {
     export function create(): TodoReducers {
-        const todoReducerRepository: TodoReducers = new Reducers<TodoState>();
-
         // Register reducers
-        todoReducerRepository.for('create').register((payload: {text: string}, state: TodoState) => {
-            const text = payload.text.trim();
-            if (text !== '') {
-                return [...state, new Todo(false, text)];
+        return (<TodoReducers>new Reducers<TodoState>())
+        .for('create').register(({text}, state) => {
+            const _text = text.trim();
+            if (_text !== '') {
+                return [...state, new Todo(false, _text)];
             }
             return state;
-        }).for('toggleCompleteAll').register((payload: {}, state: TodoState) => {
+        })
+        .for('toggleCompleteAll').register(({}, state) => {
             const allCompleted = state.every((todo) => todo.isCompleted());
             return state.map((todo) => todo.setCompleted(!allCompleted));
-        }).for('undoComplete').register((payload: {index: number}, state: TodoState) =>
-            state.map((todo, index) =>
-                index === payload.index ? todo.setCompleted(false) : todo
+        })
+        .for('undoComplete').register(({index}, state) =>
+            state.map((todo, _index) =>
+                _index === index ? todo.setCompleted(false) : todo
             )
-        ).for('complete').register((payload: {index: number}, state: TodoState) =>
-            state.map((todo, index) =>
-                index === payload.index ? todo.setCompleted(true) : todo
+        )
+        .for('complete').register(({index}, state) =>
+            state.map((todo, _index) =>
+                _index === index ? todo.setCompleted(true) : todo
             )
-        ).for('updateText').register((payload: {index: number, text: string}, state: TodoState) => {
-            const text = payload.text.trim();
-            if (text !== '') {
-                return state.map((todo, index) =>
-                    index === payload.index ? todo.setText(text) : todo
+        )
+        .for('updateText').register(({index, text}, state) => {
+            const _text = text.trim();
+            if (_text !== '') {
+                return state.map((todo, _index) =>
+                    _index === index ? todo.setText(_text) : todo
                 );
             }
             return state;
-        }).for('destroy').register((payload: {index: number}, state: TodoState) =>
-            state.filter((todo, index) => index !== payload.index)
-        ).for('destroyCompleted').register((payload: {}, state: TodoState) =>
+        })
+        .for('destroy').register(({index}, state) =>
+            state.filter((todo, _index) => _index !== index)
+        )
+        .for('destroyCompleted').register(({}, state) =>
             state.filter((todo) => !todo.isCompleted())
         );
-
-        return todoReducerRepository;
     }
 }
 
