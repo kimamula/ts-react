@@ -11,10 +11,11 @@ export default class TodoApp extends React.Component<{}, {state: TodoState}> {
 
     constructor(props: {}) {
         super(props);
-        this.state = {state: []};
         this.actions = new TodoActions(TodoReducersFactory.create());
-        const store = new TodoStore(this.actions.observable, this.state.state);
-        store.observable.subscribe((state) => this.setState({state}));
+        const store = new TodoStore(this.actions.observable, []);
+        store.observable.subscribe(
+          (state) => this.state ? this.setState({state}) : this.state = {state}
+        );
     }
 
     render(): JSX.Element {

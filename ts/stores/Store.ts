@@ -7,6 +7,6 @@ export default class Store<State> {
         this.observable = observable.scan(
             (state, partiallyAppliedReducer) => partiallyAppliedReducer(state),
             initialState
-        );
+        ).startWith(initialState);
     }
 }
