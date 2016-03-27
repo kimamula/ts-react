@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import {TsEventEmitter, EventBase, Event0} from 'ts-eventemitter';
+import TsEventEmitter from 'ts-eventemitter';
 
 module TodoStore {
 
@@ -89,7 +89,7 @@ module TodoStore {
     }).event('complete').on((id: string) => {
         update(id, { 'complete': true });
         emitChange();
-    }).event('updateText').on((id: string, text: string) => {
+    }).event('updateText').on(({id, text}) => {
         text = text.trim();
         if (text !== '') {
             update(id, { 'text': text });
@@ -105,8 +105,8 @@ module TodoStore {
 }
 
 interface TodoEventEmitter extends TsEventEmitter {
-    event(name: 'change'): Event0<TodoEventEmitter>;
-    event(name: string): EventBase<TodoEventEmitter>;
+    event(name: 'change'): TsEventEmitter.Event0<this>;
+    event(name: string): TsEventEmitter.Event;
 }
 
 var TodoEventEmitter: TodoEventEmitter = TsEventEmitter.create();

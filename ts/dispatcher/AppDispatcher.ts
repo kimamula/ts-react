@@ -1,14 +1,14 @@
-import {TsEventEmitter, EventBase, Event0, Event1, Event2} from 'ts-eventemitter';
+import TsEventEmitter from 'ts-eventemitter';
 
 export interface AppDispatcher extends TsEventEmitter {
-    event(name: 'create'): Event1<AppDispatcher, string>;
-    event(name: 'complete'): Event1<AppDispatcher, string>;
-    event(name: 'destroy'): Event1<AppDispatcher, string>;
-    event(name: 'destroyCompleted'): Event0<AppDispatcher>;
-    event(name: 'toggleCompleteAll'): Event0<AppDispatcher>;
-    event(name: 'undoComplete'): Event1<AppDispatcher, string>;
-    event(name: 'updateText'): Event2<AppDispatcher, string, string>;
-    event(name: string): EventBase<AppDispatcher>;
+    event(name: 'create'): TsEventEmitter.Event1<this, string>;
+    event(name: 'complete'): TsEventEmitter.Event1<this, string>;
+    event(name: 'destroy'): TsEventEmitter.Event1<this, string>;
+    event(name: 'destroyCompleted'): TsEventEmitter.Event0<this>;
+    event(name: 'toggleCompleteAll'): TsEventEmitter.Event0<this>;
+    event(name: 'undoComplete'): TsEventEmitter.Event1<this, string>;
+    event(name: 'updateText'): TsEventEmitter.Event1<this, { id: string; text: string; }>;
+    event(name: string): TsEventEmitter.Event;
 }
 
 var AppDispatcher: AppDispatcher = TsEventEmitter.create();

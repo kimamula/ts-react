@@ -8,7 +8,7 @@ module TodoActions {
     }
 
     export function updateText(id: string, text: string): void {
-        AppDispatcher.event('updateText').emit(id, text);
+        AppDispatcher.event('updateText').emit({id, text});
     }
 
     export function toggleComplete(todo: Todo): void {
