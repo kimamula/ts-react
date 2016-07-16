@@ -14,7 +14,10 @@
   },
   "dependencies": {
     "react/react.d.ts": {
-      "ref": "db3a54c801e29e73bdaae327a64ed7991778c958"
+      "ref": "415de78bb5108cd2c58078011819c26aa4fac3f9"
+    },
+    "react/react-dom.d.ts": {
+      "ref": "415de78bb5108cd2c58078011819c26aa4fac3f9"
     }
   }
 }

@@ -8,7 +8,8 @@
     "build": "tsc && browserify js/app.js -o js/bundle.js"
   },
   "dependencies": {
-    "react": "^0.13.3"
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
   },
   "devDependencies": {
     "browserify": "^6.2.0",

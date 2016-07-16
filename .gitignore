@@ -1,4 +1,3 @@
 node_modules
 js
-typings/*
-!typings/bundle.d.ts
+typings

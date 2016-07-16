@@ -1,7 +1,8 @@
+import * as ReactDom from 'react-dom';
 import * as React from 'react';
 import TodoApp from './components/TodoApp';
 
-React.render(
+ReactDom.render(
     <TodoApp />,
     document.getElementById('todoapp')
 );
