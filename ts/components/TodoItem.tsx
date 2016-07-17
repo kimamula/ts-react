@@ -2,6 +2,7 @@ import * as React from 'react';
 import TodoActions from '../actions/TodoActions';
 import TodoTextInput from './TodoTextInput';
 import {Todo} from '../stores/TodoStore'
+import { edit, toggle, label, destroy, view, editing, completed, todoItem } from './todoItemStyle';
 
 export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: boolean;}> {
 
@@ -13,47 +14,42 @@ export default class TodoItem extends React.Component<{todo: Todo}, {isEditing: 
     }
 
     render(): JSX.Element {
-        let todo = this.props.todo,
-            input: JSX.Element;
+        const todo = this.props.todo,
+            todoItemClassNames = [todoItem];
 
-        if (this.state.isEditing) {
-            input =
-                <TodoTextInput
-                    className="edit"
-                    onSave={(text: string) => {
-                        this.onSave(text);
-                    }}
-                    value={todo.text}
-                />;
+        if (todo.complete) {
+            todoItemClassNames.push(completed);
+        } else if (this.state.isEditing) {
+            todoItemClassNames.push(editing);
         }
 
         return (
-            <li
-                className={
-                    todo.complete ?
-                        'completed' :
-                        (this.state.isEditing ? 'editing' : null)
-                }
-                key={todo.id}>
-                <div className="view">
+            <li className={todoItemClassNames.join(' ')}>
+                <div className={view}>
                     <input
-                        className="toggle"
+                        className={toggle}
                         type="checkbox"
                         checked={todo.complete}
                         onChange={() => {
                             this.onToggleComplete();
                         }}
                     />
-                    <label onDoubleClick={() => {
+                    <label className={label} onDoubleClick={() => {
                         this.onDoubleClick();
                     }}>
                         {todo.text}
                     </label>
-                    <button className="destroy" onClick={() => {
+                    <button className={destroy} onClick={() => {
                         this.onDestroyClick();
                     }} />
                 </div>
-                {input}
+                <TodoTextInput
+                    className={edit}
+                    onSave={(text: string) => {
+                        this.onSave(text);
+                    }}
+                    value={todo.text}
+                />
             </li>
         );
     }

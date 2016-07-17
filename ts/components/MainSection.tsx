@@ -1,7 +1,8 @@
 import * as React from 'react';
 import TodoActions from '../actions/TodoActions';
 import TodoItem from './TodoItem';
-import {Todo} from '../stores/TodoStore'
+import {Todo} from '../stores/TodoStore';
+import { main, toggleAll, toggleAllLabel, todoList } from './mainSectionStyle';
 
 export default class MainSection extends React.Component<{
     allTodos: {[id: string]: Todo};
@@ -17,22 +18,23 @@ export default class MainSection extends React.Component<{
             return null;
         }
 
-        for (var id in allTodos) {
-            todos.push(<TodoItem todo={allTodos[id]} />);
+        for (let id in allTodos) {
+            todos.push(<TodoItem todo={allTodos[id]} key={id} />);
         }
 
         return (
-            <section id="main">
+            <section className={main}>
                 <input
                     id="toggle-all"
+                    className={toggleAll}
                     type="checkbox"
                     onChange={() => {
                         this.onToggleCompleteAll();
                     }}
                     checked={this.props.areAllComplete}
                 />
-                <label htmlFor="toggle-all">Mark all as complete</label>
-                <ul id="todo-list">{todos}</ul>
+                <label htmlFor="toggle-all" className={toggleAllLabel}>Mark all as complete</label>
+                <ul className={todoList}>{todos}</ul>
             </section>
         );
     }

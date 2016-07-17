@@ -3,8 +3,10 @@ import Footer from './Footer';
 import Header from './Header';
 import MainSection from './MainSection';
 import TodoStore, {Todo} from '../stores/TodoStore';
+import style from './style';
+import { todoApp, info } from './todoAppStyle';
 
-export default class TodoApp extends React.Component<{}, {
+class TodoApp extends React.Component<{}, {
     allTodos: {[id: string]: Todo};
     areAllComplete: boolean;
 }> {
@@ -23,16 +25,20 @@ export default class TodoApp extends React.Component<{}, {
     }
 
     render(): JSX.Element {
-    	return (
-            <div>
+    	return <div>
+            <section className={todoApp}>
                 <Header />
                 <MainSection
                     allTodos={this.state.allTodos}
                     areAllComplete={this.state.areAllComplete}
                 />
                 <Footer allTodos={this.state.allTodos} />
-            </div>
-        );
+            </section>
+            <footer className={info}>
+                <p>Double-click to edit a todo</p>
+            </footer>
+            <style.Element />
+        </div>;
     }
 
     private onChange = () => {
@@ -50,3 +56,5 @@ export default class TodoApp extends React.Component<{}, {
     }
 
 }
+
+export default style.component(TodoApp);

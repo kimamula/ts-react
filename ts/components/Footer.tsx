@@ -1,6 +1,7 @@
 import * as React from 'react';
 import TodoActions from '../actions/TodoActions';
 import {Todo} from '../stores/TodoStore'
+import { footer, todoCount } from './footerStyle';
 
 export default class Footer extends React.Component<{allTodos: {[id: string]: Todo}}, {}> {
 
@@ -37,8 +38,8 @@ export default class Footer extends React.Component<{allTodos: {[id: string]: To
         }
 
         return (
-            <footer id="footer">
-                <span id="todo-count">
+            <footer className={footer}>
+                <span className={todoCount}>
                     <strong>
                         {itemsLeft}
                     </strong>

@@ -1,15 +1,16 @@
 import * as React from 'react';
 import TodoActions from '../actions/TodoActions';
 import TodoTextInput from './TodoTextInput';
+import { header, title, newTodo } from './headerStyle';
 
 export default class Header extends React.Component<{}, {}> {
 
     render(): JSX.Element {
         return (
-            <header id="header">
-                <h1>todos</h1>
+            <header className={header}>
+                <h1 className={title}>todos</h1>
                 <TodoTextInput
-                    id="new-todo"
+                    className={newTodo}
                     placeholder="What needs to be done?"
                     onSave={(text: string) => {
                         this.onSave(text);
