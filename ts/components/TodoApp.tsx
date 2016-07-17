@@ -25,7 +25,7 @@ class TodoApp extends React.Component<{}, {
     }
 
     render(): JSX.Element {
-    	return <div>
+        return <div>
             <section className={todoApp}>
                 <Header />
                 <MainSection

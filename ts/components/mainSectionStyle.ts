@@ -2,9 +2,9 @@ import style, { prefixer, hidden, webkitMediaQuery } from './style';
 
 export const
     main = style.registerStyle({
-    	position: 'relative',
-    	zIndex: 2,
-	    borderTop: '1px dotted #adadad'
+        position: 'relative',
+        zIndex: 2,
+        borderTop: '1px dotted #adadad'
     }),
     toggleAllLabel = hidden,
     toggleAll = style.registerStyle({
@@ -17,7 +17,7 @@ export const
         border: 'none',
         '&:before': {
             content: `'»'`,
-	        fontSize: 28,
+            fontSize: 28,
             color: '#d9d9d9',
             padding: '0 25px 7px'
         },

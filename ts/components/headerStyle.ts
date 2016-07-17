@@ -3,8 +3,8 @@ import { editDefBase } from './todoItemStyle';
 
 export const
     header = style.registerStyle({
-    	paddingTop: 15,
-	    borderRadius: 'inherit',
+        paddingTop: 15,
+        borderRadius: 'inherit',
         '&:before': {
             content: '',
             position: 'absolute',
@@ -57,7 +57,7 @@ export const
             },
             '&::-moz-placeholder': {
                 fontStyle: 'italic',
-            	color: '#a9a9a9'
+                color: '#a9a9a9'
             }
         }
     ));

@@ -30,5 +30,5 @@ export const
     }),
     todoCount = style.registerStyle({
         float: 'left',
-	    textAlign: 'left'
+        textAlign: 'left'
     });

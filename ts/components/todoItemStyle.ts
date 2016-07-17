@@ -92,7 +92,7 @@ export const
                 })
             ),
             '&:after': {
-            	content: `'✖'`
+                content: `'✖'`
             }
         },
         prefixer({
@@ -104,11 +104,11 @@ export const
     completed = 'completed',
     todoItem = style.registerStyle({
         position: 'relative',
-	    fontSize: 24,
-	    borderBottom: '1px dotted #ccc',
+        fontSize: 24,
+        borderBottom: '1px dotted #ccc',
         [`&.${editing}`]: {
             borderBottom: 'none',
-	        padding: 0
+            padding: 0
         },
         '&:last-child': {
             borderBottom: 'none'
@@ -127,6 +127,6 @@ export const
         },
         [`&.${completed} .${label}`]: {
             color: '#a9a9a9',
-	        textDecoration: 'line-through'
+            textDecoration: 'line-through'
         }
     });
